@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  height: 100vh;
+  overflow: hidden;
+  color: #434D54;
+}
+
+.button {
+  text-transform: uppercase;
+}

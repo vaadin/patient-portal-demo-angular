@@ -18,9 +18,14 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
+        "../semantic/dist/semantic.min.css",
+        "../node_modules/angular2-data-table/release/datatable.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.slim.min.js",
+        "../semantic/dist/semantic.min.js"
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",

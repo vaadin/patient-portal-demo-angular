@@ -1,0 +1,11 @@
+<nav class="details-nav">
+  <a routerLink="/patients"><i class="arrow left icon"></i> All patients</a>
+  <div class="sub-pages">
+    <a routerLink="./profile" class="item" routerLinkActive="active">Profile</a>
+    <a routerLink="./journal" class="item" routerLinkActive="active">Journal</a>
+  </div>
+  <a routerLink="./edit">Edit</a>
+</nav>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

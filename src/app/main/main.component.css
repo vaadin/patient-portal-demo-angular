@@ -1,0 +1,45 @@
+nav.menu {
+  background: #B5B9BC;
+  height: 60px;
+  display: flex;
+}
+
+nav.menu a {
+  font-size: 16px;
+  line-height: 60px;
+  text-transform: uppercase;
+  width: 200px;
+  text-align: center;
+  color: #fff;
+  height: 100%;
+}
+
+nav.menu a:hover {
+  color: #ddd;
+}
+
+nav.menu a.active {
+  background: #fff;
+  color: #9DD22D;
+}
+
+nav.menu a.right {
+  margin-left: auto;
+}
+
+
+.container{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container .content {
+  flex: 1;
+  display: flex;
+  padding: 16px;
+}

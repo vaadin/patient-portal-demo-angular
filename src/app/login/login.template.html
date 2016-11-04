@@ -1,0 +1,22 @@
+<div class="login-view">
+  <div class="ui card login-box">
+    <div class="ui form content">
+      <h1>Patient portal</h1>
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm, $event)">
+        <div class="field">
+          <label for="username">Username:</label>
+          <input autofocus id="username" type="text" name="username" ngModel>
+        </div>
+        <div class="field">
+          <label for="password">Password:</label>
+          <input id="password" type="password" name="password" ngModel>
+        </div>
+        <button type="submit" class="ui primary button">Login</button>
+      </form>
+    </div>
+    <div *ngIf="errorMsg" role="alert" class="ui bottom attached negative message">
+      <i class="lock icon"></i>
+      {{errorMsg}}
+    </div>
+  </div>
+</div>

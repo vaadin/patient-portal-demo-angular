@@ -1,0 +1,27 @@
+<table class="ui striped selectable sortable table patients">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Id</th>
+    <th>Medical Record</th>
+    <th>Doctor</th>
+    <th>Last Entry</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let patient of patients" (click)="showPatient(patient)">
+    <td><strong>{{patient.lastName}}, {{patient.firstName}}</strong></td>
+    <td>{{patient.id}}</td>
+    <td>{{patient.medicalRecord}}</td>
+    <td>{{patient.doctor.lastName}}, {{patient.doctor.firstName}}</td>
+    <td>{{patient.lastEntry | date}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<kendo-grid >
+
+</kendo-grid>
+<div class="details" [class.open]="detailsOpen()">
+  <router-outlet></router-outlet>
+</div>
