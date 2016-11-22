@@ -44,10 +44,7 @@ export class PatientsService {
         .filter(patients => patients.length > 0)
         .map(patients => patients.find(p => p.id === id))
         .take(1)
-        .subscribe(p => {
-          console.log(p);
-          this.currentPatient.next(p);
-        });
+        .subscribe(p => this.currentPatient.next(p));
     } else {
       this.currentPatient.next(null);
     }
