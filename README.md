@@ -16,6 +16,6 @@ Make sure you have NPM installed.
 
 `npm install`
 
-3. Run application with develpment server
+3. Run application with development server
 
 `ng serve`
