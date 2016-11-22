@@ -1,0 +1,17 @@
+<nav>
+  <a routerLink="/analytics/age" routerLinkActive="active">Age</a>
+  <a routerLink="/analytics/doctor" routerLinkActive="active">Doctor</a>
+  <a routerLink="/analytics/gender" routerLinkActive="active">Gender</a>
+</nav>
+
+<kendo-chart>
+  <kendo-chart-category-axis>
+    <kendo-chart-category-axis-item [categories]="chartCategories | async">
+    </kendo-chart-category-axis-item>
+  </kendo-chart-category-axis>
+  <kendo-chart-series>
+    <kendo-chart-series-item
+      type="column" [data]="chartSeries | async">
+    </kendo-chart-series-item>
+  </kendo-chart-series>
+</kendo-chart>

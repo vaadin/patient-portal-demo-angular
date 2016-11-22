@@ -6,7 +6,6 @@ import {MainComponent} from "./main.component";
 import {PatientsModule} from "./patients/patients.module";
 import {PatientsService} from "./patients/patients.service";
 
-
 @NgModule({
   declarations: [
     MainComponent
@@ -14,11 +13,10 @@ import {PatientsService} from "./patients/patients.service";
   imports: [
     CommonModule,
     MainRoutingModule,
-    AnalyticsModule,
     PatientsModule,
-    MainRoutingModule
-  ],
-  providers: [PatientsService]
+    AnalyticsModule
+  ]
 })
 export class MainModule {
 }
+

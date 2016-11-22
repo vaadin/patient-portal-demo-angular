@@ -8,6 +8,9 @@ import {EmptyComponent} from "./empty.component";
 
 export const PATIENT_DETAIL_ROUTES: Routes = [
   {
+    path: 'new',
+    component: ProfileEditComponent
+  }, {
     path: ':id',
     component: PatientDetailComponent,
     children: [
@@ -18,13 +21,10 @@ export const PATIENT_DETAIL_ROUTES: Routes = [
         path: 'profile/edit',
         component: ProfileEditComponent
       }, {
-        path: 'new',
-        component: ProfileEditComponent
-      }, {
         path: 'journal',
         component: JournalComponent
       }, {
-        path: 'journal/edit',
+        path: 'journal/new',
         component: JournalEditComponent
       }, {
         path: '',

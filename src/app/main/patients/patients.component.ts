@@ -1,42 +1,68 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, OnDestroy} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
-import {Patient, Page} from "../entities";
+import {Patient} from "../entities";
 import {PatientsService} from "./patients.service";
+import {Subscription, Observable} from "rxjs";
+import {SelectionEvent, SortDescriptor} from "@progress/kendo-angular-grid";
+import {ResponsiveService} from "../responsive.service";
+
 @Component({
   templateUrl: 'patients.component.html',
   styleUrls: ['patients.component.css']
 })
-export class PatientsComponent implements OnInit {
+export class PatientsComponent implements OnInit, OnDestroy {
 
-  protected patients: Patient[] = [];
-  protected page: Page;
+  protected patients: Patient[];
+  protected currentPatient: Patient;
+  protected sort: SortDescriptor[];
+  protected subs: Subscription[] = [];
+  narrow: boolean;
 
   constructor(private patientsService: PatientsService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private responsive: ResponsiveService) {
   }
 
   ngOnInit(): void {
-    this.getPatients();
+    this.subs.push(this.patientsService.patients.subscribe(
+      patients => this.patients = patients
+    ));
+
+    this.subs.push(this.patientsService.currentPatient.subscribe(
+      patient => {
+        this.currentPatient = patient;
+      }
+    ));
+
+    this.patientsService.getPatients();
+
+    this.subs.push(this.responsive.resizeObservable.subscribe(narrow => this.narrow = narrow));
   }
 
-  getPatients() {
-    this.patientsService.getPatients()
-      .subscribe(
-        patients => this.patients = patients,
-        err => console.log(err)
-      );
+  private checkWidth() {
+    return this.narrow = window.innerWidth < 600;
   }
 
-  rowActivated(activatedDetails: Object) {
-    console.log(activatedDetails);
+  patientSelectionChanged(evt: SelectionEvent) {
+    if (evt.selected) {
+      this.router.navigate([this.patients[evt.index].id], {relativeTo: this.route});
+    } else {
+      this.router.navigate(['/patients']);
+    }
   }
 
-  showPatient(patient: Patient) {
-    this.router.navigate([patient.medicalRecord], {relativeTo: this.route});
+
+  sortChanged(sort: SortDescriptor[]) {
+    this.patientsService.setSorting(sort);
   }
 
   detailsOpen() {
-    return this.router.url.indexOf('/patients/') >= 0;
+    return !!this.currentPatient;
   }
+
+  ngOnDestroy() {
+    this.subs.forEach(sub => sub.unsubscribe());
+  }
+
 }

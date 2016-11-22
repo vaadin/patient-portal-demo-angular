@@ -1,0 +1,43 @@
+h3 {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+article {
+  margin-bottom: 25px;
+}
+
+.journal-entry{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cell-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cell-wrapper div {
+  width: 50%;
+}
+
+.cell-wrapper .date {
+  font-weight: bold;
+}
+
+.cell-wrapper .appointment,
+.cell-wrapper .doctor {
+  text-align: right;
+}
+
+.cell-wrapper .doctor-label {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: bold;
+}

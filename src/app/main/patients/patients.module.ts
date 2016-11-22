@@ -10,8 +10,9 @@ import {ProfileComponent} from "./detail/profile/profile.component";
 import {PatientDetailComponent} from "./detail/patient-detail.component";
 import {EmptyComponent} from "./detail/empty.component";
 import {PatientsRoutingModule} from "./patients-routing.module";
-import {PatientDetailsService} from "./detail/patient-detail.service";
 import {GridModule} from "@progress/kendo-angular-grid";
+import {CapitalizePipe} from "../capitalize.pipe";
+import {JournalService} from "./detail/journal/journal.service";
 
 @NgModule({
   imports: [
@@ -28,11 +29,12 @@ import {GridModule} from "@progress/kendo-angular-grid";
     JournalComponent,
     JournalEditComponent,
     PatientDetailComponent,
-    EmptyComponent
+    EmptyComponent,
+    CapitalizePipe
   ],
   providers: [
     PatientsService,
-    PatientDetailsService
+    JournalService
   ]
 })
 export class PatientsModule {

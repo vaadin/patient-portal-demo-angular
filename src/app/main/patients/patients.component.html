@@ -1,26 +1,69 @@
-<table class="ui striped selectable sortable table patients">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Id</th>
-    <th>Medical Record</th>
-    <th>Doctor</th>
-    <th>Last Entry</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let patient of patients" (click)="showPatient(patient)">
-    <td><strong>{{patient.lastName}}, {{patient.firstName}}</strong></td>
-    <td>{{patient.id}}</td>
-    <td>{{patient.medicalRecord}}</td>
-    <td>{{patient.doctor.lastName}}, {{patient.doctor.firstName}}</td>
-    <td>{{patient.lastEntry | date}}</td>
-  </tr>
-  </tbody>
-</table>
+<a routerLink="/patients/new" class="button primary add"><i class="fa fa-plus"></i> Add new patient</a>
 
-<kendo-grid >
-
+<kendo-grid
+  #grid
+  class="patients-grid"
+  [data]="patients"
+  [sortable]="{mode: 'single'}"
+  [selectable]="true"
+  [sort]="sort"
+  (selectionChange)="patientSelectionChanged($event)"
+  (sortChange)="sortChanged($event)"
+  [height]="800"
+  class="patients-grid">
+  <kendo-grid-column field="lastName">
+    <template kendoHeaderTemplate>
+      Name
+    </template>
+    <template kendoCellTemplate let-dataItem>
+      <span class="name">
+        {{dataItem.lastName}}, {{dataItem.firstName}}
+      </span>
+    </template>
+  </kendo-grid-column>
+  <template [ngIf]="!narrow">
+    <kendo-grid-column field="id">
+      <template kendoHeaderTemplate>
+        Id
+      </template>
+    </kendo-grid-column>
+    <kendo-grid-column field="doctor.lastName">
+      <template kendoHeaderTemplate>
+        Doctor
+      </template>
+      <template kendoCellTemplate let-dataItem>
+        {{dataItem.doctor.lastName}}, {{dataItem.doctor.firstName}}
+      </template>
+    </kendo-grid-column>
+    <kendo-grid-column field="lastEntry">
+      <template kendoHeaderTemplate>
+        Last Entry
+      </template>
+      <template kendoCellTemplate let-dataItem>
+        {{dataItem.lastEntry | date}}
+      </template>
+    </kendo-grid-column>
+  </template>
+  <template kendoDetailTemplate let-dataItem *ngIf="narrow">
+    <div class="details-row">
+      <div class="field">
+        <label>Id</label>
+        <span>{{dataItem.id}}</span>
+      </div>
+      <div class="field">
+        <label>Medical record</label>
+        <span>{{dataItem.medicalRecord}}</span>
+      </div>
+      <div class="field">
+        <label>Doctor</label>
+        <span>{{dataItem.doctor.lastName}}, {{dataItem.doctor.firstName}}</span>
+      </div>
+      <div class="field">
+        <label>Last entry</label>
+        <span>{{dataItem.lastEntry | date}}</span>
+      </div>
+    </div>
+  </template>
 </kendo-grid>
 <div class="details" [class.open]="detailsOpen()">
   <router-outlet></router-outlet>

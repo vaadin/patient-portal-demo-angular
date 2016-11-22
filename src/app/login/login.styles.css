@@ -7,14 +7,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem;
 }
 
 .login-box {
   width: 400px;
+  position: relative;
 }
 
 .login-box h1 {
   color: #9DD22D;
   text-transform: uppercase;
   font-weight: 300;
+}
+
+.login-box button {
+  width: 40%;
+}
+
+.alert.error {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(75px);
+}
+
+button {
+  margin-top: 1rem;
 }

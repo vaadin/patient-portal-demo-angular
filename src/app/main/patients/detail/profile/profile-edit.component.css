@@ -1,0 +1,49 @@
+.profile-edit-view {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+header h1 {
+  color: #9DD22D;
+  text-transform: uppercase;
+  display: inline-block;
+  margin: 1rem auto;
+  border-bottom: 2px solid #9DD22D;
+  padding-bottom: 0.25rem;
+  font-size: 1.2rem;
+}
+
+.form-wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+footer  {
+  margin: 3rem auto;
+}
+
+footer  button {
+  margin-right: 0.5rem;
+}
+
+footer button:last-child {
+  margin-right: 0;
+}
+
+@media (max-width: 700px) {
+  .form-wrapper {
+    width: 90%
+  }
+  .field label {
+    width: 100%;
+  }
+}

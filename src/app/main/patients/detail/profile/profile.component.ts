@@ -1,25 +1,29 @@
 import {Component, OnInit, OnDestroy} from "@angular/core";
 import {Subscription} from "rxjs";
-import {PatientDetailsService} from "../patient-detail.service";
+import {PatientsService} from "../../patients.service";
 import {Patient} from "../../../entities";
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html'
+  templateUrl: 'profile.component.html',
+  styleUrls: ['profile.component.css']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-  private subscription: Subscription;
-  patient: Patient = new Patient();
 
-  constructor(private service: PatientDetailsService) {
+  patient: Patient;
+  sub: Subscription;
+
+  constructor(private service: PatientsService) {
   }
 
   ngOnInit() {
-    this.subscription = this.service.patientSubject.subscribe(
-      patient => this.patient = patient);
+    this.sub = this.service.currentPatient.subscribe(
+      patient => this.patient = patient
+    );
+
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.sub.unsubscribe();
   }
 }

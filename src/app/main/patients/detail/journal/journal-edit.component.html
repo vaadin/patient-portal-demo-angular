@@ -1,3 +1,48 @@
-<p>
-  journal-edit works!
-</p>
+<header>
+  <h1>New Journal Entry</h1>
+  <a routerLink="../" class="close-link"><i class="fa fa-close"></i></a>
+</header>
+
+<form #form="ngForm" (ngSubmit)="save(form)">
+
+  <div class="details">
+    <div class="field">
+      <label>Patient</label>
+      <span>{{patient?.lastName}}, {{patient?.firstName}}</span>
+    </div>
+
+    <div class="field">
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" required [ngModel]="entry?.date | date:'y-MM-dd'">
+    </div>
+
+    <div class="field">
+      <label for="appointment">Appointment</label>
+      <select id="appointment" name="appointmentType" required [ngModel]="entry?.appointmentType">
+        <option *ngFor="let type of types" [value]="type">{{type | capitalize}}</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="doctor">Doctor</label>
+      <select id="doctor" name="doctor" required [ngModel]="entry?.doctor">
+        <option *ngFor="let doctor of doctors"
+                [ngValue]="doctor">{{doctor.lastName}}, {{doctor.firstName}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="field stacked centered notes">
+    <label for="entry">Notes</label>
+    <textarea id="entry" rows="15" name="entry" [ngModel]="entry?.entry">
+    </textarea>
+  </div>
+
+  <div class="buttons">
+    <button class="primary" type="submit" [disabled]="!form.valid">Save</button>
+    <a class="button" routerLink="../">Cancel</a>
+  </div>
+
+</form>

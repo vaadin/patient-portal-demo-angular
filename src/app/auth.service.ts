@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {Http, Response} from "@angular/http";
 import {AppConfiguration} from "./app-configuration.service";
 import {AuthInfo} from "./auth-info";
-import "./rxjs-operators";
 import {Observable} from "rxjs";
 
 @Injectable()

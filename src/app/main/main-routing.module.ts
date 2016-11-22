@@ -4,6 +4,14 @@ import {MainComponent} from "./main.component";
 import {PatientsModule} from "./patients/patients.module";
 import {AnalyticsModule} from "./analytics/analytics.module";
 
+
+export function patientsLoader () {
+  return PatientsModule
+}
+export function analyticsLoader () {
+  return AnalyticsModule
+}
+
 @NgModule({
   imports: [
     RouterModule.forChild([
@@ -13,10 +21,10 @@ import {AnalyticsModule} from "./analytics/analytics.module";
         children: [
           {
             path: 'patients',
-            loadChildren: () => PatientsModule
+            loadChildren: patientsLoader
           }, {
             path: 'analytics',
-            loadChildren: () => AnalyticsModule
+            loadChildren: analyticsLoader
           }, {
             path: '',
             redirectTo: 'patients'

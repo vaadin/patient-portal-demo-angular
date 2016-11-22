@@ -1,0 +1,37 @@
+:host {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  justify-content: center;
+  text-transform: uppercase;
+  margin: 2em auto;
+}
+
+nav a {
+  color: #B5B9BC;
+  padding-bottom: 4px;
+  margin-right: 16px;
+}
+
+nav a:last-child {
+  margin-right: 0;
+}
+nav a.active {
+  color: #9DD22D;
+  border-bottom: 2px solid #9DD22D;
+}
+
+kendo-chart {
+  width: 100%;
+}
+
+
+@media (max-width: 600px){
+  kendo-chart {
+    flex: 1;
+  }
+}

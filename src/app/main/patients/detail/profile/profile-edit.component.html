@@ -1,3 +1,77 @@
-<p>
-  profile-edit works!
-</p>
+<div class="profile-edit-view">
+  <header>
+    <h1>Editing profile</h1>
+    <a routerLink="../" class="close-link"><i class="fa fa-close"></i></a>
+  </header>
+  <div class="form-wrapper">
+    <form #patientForm="ngForm" (ngSubmit)="save(patientForm)">
+
+      <div class="field" *ngIf="patient?.id">
+        <label>Patient Id</label>
+        <span>{{patient?.id}}</span>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="field">
+        <label for="title">Title</label>
+        <select id="title" required name="title" [ngModel]="patient?.title">
+          <option value="Miss">Miss</option>
+          <option value="Ms">Ms</option>
+          <option value="Mrs">Mrs</option>
+          <option value="Mr">Mr</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="firstName">First name</label>
+        <input type="text" id="firstName" name="firstName" required [ngModel]="patient?.firstName">
+      </div>
+      <div class="field">
+        <label for="middleName">Middle name</label>
+        <input type="text" id="middleName" name="middleName" required [ngModel]="patient?.middleName">
+      </div>
+      <div class="field">
+        <label for="lastName">Middle name</label>
+        <input type="text" id="lastName" name="lastName" required [ngModel]="patient?.lastName">
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="field">
+        <label for="gender">Gender</label>
+        <select id="gender" required name="gender" [ngModel]="patient?.gender">
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="birthDate">Date of birth</label>
+        <input type="date" id="birthDate" name="birthDate" required [ngModel]="patient?.birthDate | date:'y-MM-dd'">
+      </div>
+
+      <div class="field">
+        <label for="ssn">SSN</label>
+        <input type="text" id="ssn" name="ssn" pattern="\d{3}-\d{2}-\d{4}" required [ngModel]="patient?.ssn">
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="field">
+        <label for="doctor">Doctor</label>
+        <select id="doctor" name="doctor" required [ngModel]="patient?.doctor">
+          <option *ngFor="let doctor of doctors"
+                  [ngValue]="doctor">{{doctor.lastName}}, {{doctor.firstName}}</option>
+        </select>
+      </div>
+
+      <footer>
+        <button class="primary" [disabled]="!patientForm.valid">Save</button>
+        <a class="button" routerLink="../">Cancel</a>
+        <button type="button" *ngIf="patient?.id" class="danger" (click)="deletePatient()">Delete</button>
+      </footer>
+    </form>
+  </div>
+</div>

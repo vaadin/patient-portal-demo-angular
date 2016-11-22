@@ -6,8 +6,11 @@ import {NgModule} from "@angular/core";
   imports: [
     RouterModule.forChild([
       {
-        path: '',
+        path: ':grouping',
         component: AnalyticsComponent
+      }, {
+        path: '',
+        redirectTo: 'age'
       }
     ])
   ],

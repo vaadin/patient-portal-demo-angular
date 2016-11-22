@@ -16,6 +16,7 @@ nav.menu a {
 
 nav.menu a:hover {
   color: #ddd;
+  background: #747C81;
 }
 
 nav.menu a.active {
