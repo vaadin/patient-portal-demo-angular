@@ -3,7 +3,9 @@ import {Router, ActivatedRoute} from "@angular/router";
 import {Patient} from "../entities";
 import {PatientsService} from "./patients.service";
 import {Subscription, Observable} from "rxjs";
-import {SelectionEvent, SortDescriptor} from "@progress/kendo-angular-grid";
+import {SelectionEvent} from "@progress/kendo-angular-grid";
+import {SortDescriptor} from '@progress/kendo-data-query';
+
 import {ResponsiveService} from "../responsive.service";
 
 @Component({
@@ -51,7 +53,6 @@ export class PatientsComponent implements OnInit, OnDestroy {
       this.router.navigate(['/patients']);
     }
   }
-
 
   sortChanged(sort: SortDescriptor[]) {
     this.patientsService.setSorting(sort);

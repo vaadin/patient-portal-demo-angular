@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 import {Observable, BehaviorSubject} from "rxjs";
 import {Patient} from "../entities";
 import {AppConfiguration} from "../../app-configuration.service";
-import {SortDescriptor, orderBy} from "@progress/kendo-angular-grid";
+import {SortDescriptor, orderBy} from "@progress/kendo-data-query";
 
 @Injectable()
 export class PatientsService {
