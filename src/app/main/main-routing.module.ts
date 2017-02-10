@@ -1,16 +1,15 @@
 import {NgModule} from "@angular/core";
 import {RouterModule} from "@angular/router";
 import {MainComponent} from "./main.component";
-import {PatientsModule} from "./patients/patients.module";
-import {AnalyticsModule} from "./analytics/analytics.module";
 
 
-export function patientsLoader () {
-  return PatientsModule
-}
-export function analyticsLoader () {
-  return AnalyticsModule
-}
+// https://github.com/angular/angular-cli/issues/4192
+// export function patientsLoader () {
+//   return PatientsModule
+// }
+// export function analyticsLoader () {
+//   return AnalyticsModule
+// }
 
 @NgModule({
   imports: [
@@ -21,10 +20,10 @@ export function analyticsLoader () {
         children: [
           {
             path: 'patients',
-            loadChildren: patientsLoader
+            loadChildren: './patients/patients.module#PatientsModule'//patientsLoader
           }, {
             path: 'analytics',
-            loadChildren: analyticsLoader
+            loadChildren: './analytics/analytics.module#AnalyticsModule'//analyticsLoader
           }, {
             path: '',
             redirectTo: 'patients'

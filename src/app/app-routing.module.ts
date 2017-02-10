@@ -10,7 +10,7 @@ export const routes: Routes = [
     component: LoginComponent
   }, {
     path: '',
-    loadChildren: 'app/main/main.module#MainModule',
+    loadChildren: './main/main.module#MainModule',
     canActivate: [AuthGuard]
   }, {
     path: '**',
