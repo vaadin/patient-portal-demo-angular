@@ -4,6 +4,7 @@ import {Observable, BehaviorSubject} from "rxjs";
 import {Patient} from "../entities";
 import {AppConfiguration} from "../../app-configuration.service";
 import {SortDescriptor, orderBy} from "@progress/kendo-data-query";
+import {GridDataResult} from "@progress/kendo-angular-grid";
 
 @Injectable()
 export class PatientsService {
@@ -12,19 +13,24 @@ export class PatientsService {
               private config: AppConfiguration) {
   }
 
-  public patients: BehaviorSubject<Patient[]> = new BehaviorSubject([]);
+  public patients: BehaviorSubject<GridDataResult> = new BehaviorSubject(null);
   public currentPatient: BehaviorSubject<Patient> = new BehaviorSubject(null);
   private sort: SortDescriptor[];
+  private state: any;
 
 
-  getPatients() {
+  getPatients(state) {
+    this.state = state;
+    console.log(state);
     this.http
-      .get(`${this.config.API_URL}/patients`)
-      .map(res => this.parseDates(res.json()))
-      .map(this.sortPatients)
+      .get(`${this.config.API_URL}/patients?page=${state.skip/state.take}&limit=${state.take}`)
+      .map(res => res.json())
       .catch(res => Observable.throw(res.json().message))
-      .subscribe(fetchedPatients => {
-        this.patients.next(fetchedPatients);
+      .subscribe(res => {
+        this.patients.next(<GridDataResult>{
+          data: this.parseDates(res.content),
+          total: res.totalElements
+        });
         const patient = this.currentPatient.getValue();
         // refresh current patient
         if (patient) {
@@ -33,16 +39,11 @@ export class PatientsService {
       });
   }
 
-  setSorting(sort: SortDescriptor[]) {
-    this.sort = sort;
-    this.patients.next(this.sortPatients(this.patients.getValue()));
-  }
-
   setCurrentPatient(id: number) {
     if (id) {
       this.patients
-        .filter(patients => patients.length > 0)
-        .map(patients => patients.find(p => p.id === id))
+        .filter(patients => patients.data.length > 0)
+        .map(patients => patients.data.find(p => p.id === id))
         .take(1)
         .subscribe(p => this.currentPatient.next(p));
     } else {
@@ -65,7 +66,7 @@ export class PatientsService {
       .catch(res => Observable.throw(res.json().message))
       .subscribe(() => {
         this.setCurrentPatient(null);
-        this.getPatients();
+        this.getPatients(this.state);
       });
   }
 
@@ -76,7 +77,7 @@ export class PatientsService {
     return putOrPost
       .catch(res => Observable.throw(res.json().message))
       .map(res => {
-        this.getPatients();
+        this.getPatients(this.state);
         return res;
       });
   }

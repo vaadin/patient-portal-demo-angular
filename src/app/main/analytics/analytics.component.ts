@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {AnalyticsService} from "./analytics.service";
-
+import 'hammerjs';
 
 @Component({
   templateUrl: 'analytics.component.html',

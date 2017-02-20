@@ -1,9 +1,9 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
+import {Component, OnInit, OnDestroy, ViewChild} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
 import {Patient} from "../entities";
 import {PatientsService} from "./patients.service";
-import {Subscription, Observable} from "rxjs";
-import {SelectionEvent} from "@progress/kendo-angular-grid";
+import {Subscription, Observable, BehaviorSubject} from "rxjs";
+import {SelectionEvent, GridDataResult, DataStateChangeEvent, GridComponent} from "@progress/kendo-angular-grid";
 import {SortDescriptor} from '@progress/kendo-data-query';
 
 import {ResponsiveService} from "../responsive.service";
@@ -14,11 +14,16 @@ import {ResponsiveService} from "../responsive.service";
 })
 export class PatientsComponent implements OnInit, OnDestroy {
 
-  protected patients: Patient[];
+  protected patients: BehaviorSubject<GridDataResult>;
   protected currentPatient: Patient;
   protected sort: SortDescriptor[];
   protected subs: Subscription[] = [];
+
+  protected pageSize: number = 50;
+  protected skip: number = 0;
+
   narrow: boolean;
+  @ViewChild(GridComponent) private grid: GridComponent;
 
   constructor(private patientsService: PatientsService,
               private route: ActivatedRoute,
@@ -27,9 +32,7 @@ export class PatientsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subs.push(this.patientsService.patients.subscribe(
-      patients => this.patients = patients
-    ));
+    this.patients = this.patientsService.patients;
 
     this.subs.push(this.patientsService.currentPatient.subscribe(
       patient => {
@@ -37,26 +40,28 @@ export class PatientsComponent implements OnInit, OnDestroy {
       }
     ));
 
-    this.patientsService.getPatients();
+    this.patientsService.getPatients({skip: this.skip, take: this.pageSize});
 
-    this.subs.push(this.responsive.resizeObservable.subscribe(narrow => this.narrow = narrow));
-  }
+    this.subs.push(this.responsive.resizeObservable.subscribe(
+      narrow => this.narrow = narrow
+    ));
 
-  private checkWidth() {
-    return this.narrow = window.innerWidth < 600;
+    this.grid.dataStateChange
+      .do(({ skip, take }: DataStateChangeEvent) => {
+        this.skip = skip;
+        this.pageSize = take;
+      })
+      .subscribe(x => this.patientsService.getPatients(x));
   }
 
   patientSelectionChanged(evt: SelectionEvent) {
     if (evt.selected) {
-      this.router.navigate([this.patients[evt.index].id], {relativeTo: this.route});
+      this.router.navigate([this.patients.getValue().data[evt.index].id], {relativeTo: this.route});
     } else {
       this.router.navigate(['/patients']);
     }
   }
 
-  sortChanged(sort: SortDescriptor[]) {
-    this.patientsService.setSorting(sort);
-  }
 
   detailsOpen() {
     return !!this.currentPatient;

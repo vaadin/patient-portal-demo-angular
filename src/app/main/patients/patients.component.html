@@ -3,12 +3,13 @@
 <kendo-grid
   #grid
   class="patients-grid"
-  [data]="patients"
+  [data]="patients | async"
   [sortable]="{mode: 'single'}"
+  [pageSize]="pageSize"
+  [skip]="skip"
+  [pageable]="true"
   [selectable]="true"
-  [sort]="sort"
   (selectionChange)="patientSelectionChanged($event)"
-  (sortChange)="sortChanged($event)"
   [height]="800"
   class="patients-grid">
   <kendo-grid-column field="lastName">
