@@ -20,12 +20,12 @@
       "mobile": false,
       "styles": [
         "../node_modules/font-awesome/css/font-awesome.min.css",
-        "../node_modules/@telerik/kendo-theme-default/dist/all.css",
+        "../node_modules/@progress/kendo-theme-default/dist/all.css",
         "styles.css"
       ],
       "scripts": [],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
