@@ -1,9 +1,9 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
-import {JournalService} from "./journal.service";
-import {Observable, Subscription} from "rxjs";
-import {JournalEntry, Patient} from "../../../entities";
-import {PatientsService} from "../../patients.service";
-import {ResponsiveService} from "../../../responsive.service";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { JournalService } from './journal.service';
+import { Observable, Subscription } from 'rxjs';
+import { JournalEntry, Patient } from '../../../entities';
+import { PatientsService } from '../../patients.service';
+import { ResponsiveService } from '../../../responsive.service';
 
 @Component({
   selector: 'app-journal',
@@ -18,8 +18,8 @@ export class JournalComponent implements OnInit, OnDestroy {
   narrow: boolean;
 
   constructor(private service: JournalService,
-              private patientsService: PatientsService,
-              private  responsivService: ResponsiveService) {
+    private patientsService: PatientsService,
+    private responsivService: ResponsiveService) {
     this.entries = this.service.entries;
   }
 
@@ -28,7 +28,7 @@ export class JournalComponent implements OnInit, OnDestroy {
       patient => this.currentPatient = patient
     ));
 
-    this.subs.push(this.responsivService.resizeObservable.subscribe(narrow=> this.narrow = narrow));
+    this.subs.push(this.responsivService.resizeObservable.subscribe(narrow => this.narrow = narrow));
   }
 
   ngOnDestroy() {

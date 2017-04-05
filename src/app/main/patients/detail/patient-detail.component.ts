@@ -1,7 +1,7 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {PatientsService} from "../patients.service";
-import {Subscription} from "rxjs";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PatientsService } from '../patients.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-patient',
@@ -13,8 +13,8 @@ export class PatientDetailComponent implements OnInit, OnDestroy {
   sub: Subscription;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private patientsService: PatientsService) {
+    private router: Router,
+    private patientsService: PatientsService) {
 
   }
 

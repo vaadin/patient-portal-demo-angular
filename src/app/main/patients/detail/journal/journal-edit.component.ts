@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {JournalService} from "./journal.service";
-import {Router} from "@angular/router";
-import {JournalEntry, Doctor, Patient, AppointmentTypes} from "../../../entities";
-import {NgForm} from "@angular/forms";
-import {PatientsService} from "../../patients.service";
-import {PlatformLocation} from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { JournalService } from './journal.service';
+import { Router } from '@angular/router';
+import { JournalEntry, Doctor, Patient, AppointmentTypes } from '../../../entities';
+import { NgForm } from '@angular/forms';
+import { PatientsService } from '../../patients.service';
+import { PlatformLocation } from '@angular/common';
 
 @Component({
   selector: 'app-journal-edit',
@@ -19,9 +19,9 @@ export class JournalEditComponent implements OnInit {
   types: string[] = AppointmentTypes;
 
   constructor(private journalService: JournalService,
-              private patientsService: PatientsService,
-              private router: Router,
-              private location: PlatformLocation) {
+    private patientsService: PatientsService,
+    private router: Router,
+    private location: PlatformLocation) {
   }
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class JournalEditComponent implements OnInit {
   }
 
 
-  save(form: NgForm){
+  save(form: NgForm) {
     this.journalService.addJournalEntry(form.value);
     this.location.back();
 

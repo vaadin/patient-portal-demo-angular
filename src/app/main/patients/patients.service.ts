@@ -1,29 +1,27 @@
-import {Http} from "@angular/http";
-import {Injectable} from "@angular/core";
-import {Observable, BehaviorSubject} from "rxjs";
-import {Patient} from "../entities";
-import {AppConfiguration} from "../../app-configuration.service";
-import {SortDescriptor, orderBy} from "@progress/kendo-data-query";
-import {GridDataResult} from "@progress/kendo-angular-grid";
+import { Http } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { Patient } from '../entities';
+import { AppConfiguration } from '../../app-configuration.service';
+import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
+import { GridDataResult } from '@progress/kendo-angular-grid';
 
 @Injectable()
 export class PatientsService {
-
-  constructor(private http: Http,
-              private config: AppConfiguration) {
-  }
-
   public patients: BehaviorSubject<GridDataResult> = new BehaviorSubject(null);
   public currentPatient: BehaviorSubject<Patient> = new BehaviorSubject(null);
   private sort: SortDescriptor[];
   private state: any;
 
+  constructor(private http: Http,
+    private config: AppConfiguration) {
+  }
 
   getPatients(state) {
     this.state = state;
     console.log(state);
     this.http
-      .get(`${this.config.API_URL}/patients?page=${state.skip/state.take}&limit=${state.take}`)
+      .get(`${this.config.API_URL}/patients?page=${state.skip / state.take}&limit=${state.take}`)
       .map(res => res.json())
       .catch(res => Observable.throw(res.json().message))
       .subscribe(res => {
@@ -90,7 +88,7 @@ export class PatientsService {
   }
 
   private parseDates(patients: Patient[]) {
-    return patients.map(p=> {
+    return patients.map(p => {
       p.lastEntry = new Date(p.lastEntry);
       p.birthDate = new Date(p.birthDate);
       return p;

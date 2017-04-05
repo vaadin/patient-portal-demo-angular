@@ -1,6 +1,6 @@
-import {NgModule} from "@angular/core";
-import {RouterModule} from "@angular/router";
-import {MainComponent} from "./main.component";
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { MainComponent } from './main.component';
 
 
 // https://github.com/angular/angular-cli/issues/4192

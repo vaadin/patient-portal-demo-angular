@@ -1,10 +1,10 @@
-import {Routes} from "@angular/router";
-import {JournalEditComponent} from "./journal/journal-edit.component";
-import {JournalComponent} from "./journal/journal.component";
-import {ProfileEditComponent} from "./profile/profile-edit.component";
-import {ProfileComponent} from "./profile/profile.component";
-import {PatientDetailComponent} from "./patient-detail.component";
-import {EmptyComponent} from "./empty.component";
+import { Routes } from '@angular/router';
+import { JournalEditComponent } from './journal/journal-edit.component';
+import { JournalComponent } from './journal/journal.component';
+import { ProfileEditComponent } from './profile/profile-edit.component';
+import { ProfileComponent } from './profile/profile.component';
+import { PatientDetailComponent } from './patient-detail.component';
+import { EmptyComponent } from './empty.component';
 
 export const PATIENT_DETAIL_ROUTES: Routes = [
   {

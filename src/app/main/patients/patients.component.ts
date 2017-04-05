@@ -1,12 +1,12 @@
-import {Component, OnInit, OnDestroy, ViewChild} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
-import {Patient} from "../entities";
-import {PatientsService} from "./patients.service";
-import {Subscription, Observable, BehaviorSubject} from "rxjs";
-import {SelectionEvent, GridDataResult, DataStateChangeEvent, GridComponent} from "@progress/kendo-angular-grid";
-import {SortDescriptor} from '@progress/kendo-data-query';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Patient } from '../entities';
+import { PatientsService } from './patients.service';
+import { Subscription, Observable, BehaviorSubject } from 'rxjs';
+import { SelectionEvent, GridDataResult, DataStateChangeEvent, GridComponent } from '@progress/kendo-angular-grid';
+import { SortDescriptor } from '@progress/kendo-data-query';
 
-import {ResponsiveService} from "../responsive.service";
+import { ResponsiveService } from '../responsive.service';
 
 @Component({
   templateUrl: 'patients.component.html',
@@ -14,21 +14,20 @@ import {ResponsiveService} from "../responsive.service";
 })
 export class PatientsComponent implements OnInit, OnDestroy {
 
-  protected patients: BehaviorSubject<GridDataResult>;
-  protected currentPatient: Patient;
-  protected sort: SortDescriptor[];
-  protected subs: Subscription[] = [];
-
-  protected pageSize: number = 50;
-  protected skip: number = 0;
+  public patients: BehaviorSubject<GridDataResult>;
+  public currentPatient: Patient;
+  public sort: SortDescriptor[];
+  public subs: Subscription[] = [];
+  public pageSize = 50;
+  public skip = 0;
 
   narrow: boolean;
   @ViewChild(GridComponent) private grid: GridComponent;
 
   constructor(private patientsService: PatientsService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private responsive: ResponsiveService) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private responsive: ResponsiveService) {
   }
 
   ngOnInit(): void {
@@ -40,7 +39,7 @@ export class PatientsComponent implements OnInit, OnDestroy {
       }
     ));
 
-    this.patientsService.getPatients({skip: this.skip, take: this.pageSize});
+    this.patientsService.getPatients({ skip: this.skip, take: this.pageSize });
 
     this.subs.push(this.responsive.resizeObservable.subscribe(
       narrow => this.narrow = narrow
@@ -56,7 +55,7 @@ export class PatientsComponent implements OnInit, OnDestroy {
 
   patientSelectionChanged(evt: SelectionEvent) {
     if (evt.selected) {
-      this.router.navigate([this.patients.getValue().data[evt.index].id], {relativeTo: this.route});
+      this.router.navigate([this.patients.getValue().data[evt.index].id], { relativeTo: this.route });
     } else {
       this.router.navigate(['/patients']);
     }

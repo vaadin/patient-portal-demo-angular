@@ -23,6 +23,7 @@ export class JournalEntry {
 export class Patient {
   public medicalRecord: number;
   public id: number;
+  public title: string;
   public firstName: string;
   public middleName: string;
   public lastName: string;
@@ -33,4 +34,5 @@ export class Patient {
   public ssn: string;
   public pictureUrl: string;
   public journalEntries?: JournalEntry[];
+  public lastVisit: Date;
 }

@@ -1,7 +1,7 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
-import {Subscription} from "rxjs";
-import {PatientsService} from "../../patients.service";
-import {Patient} from "../../../entities";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { PatientsService } from '../../patients.service';
+import { Patient } from '../../../entities';
 
 @Component({
   selector: 'app-profile',

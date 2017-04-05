@@ -1,6 +1,6 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
-import {AnalyticsService} from "./analytics.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AnalyticsService } from './analytics.service';
 import 'hammerjs';
 
 @Component({
@@ -8,13 +8,13 @@ import 'hammerjs';
   styleUrls: ['analytics.component.css']
 })
 export class AnalyticsComponent implements OnInit {
-  protected options: Object = {};
-  private chartSeries;
-  private chartCategories;
-  private grouping;
+  public options: Object = {};
+  public chartSeries;
+  public chartCategories;
+  public grouping;
 
   constructor(private route: ActivatedRoute,
-              private service: AnalyticsService) {
+    private service: AnalyticsService) {
   }
 
   ngOnInit(): void {

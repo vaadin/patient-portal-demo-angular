@@ -6,8 +6,8 @@ import {
   RequestOptionsArgs,
   Response,
   Headers
-} from "@angular/http";
-import {Observable} from "rxjs";
+} from '@angular/http';
+import { Observable } from 'rxjs';
 /**
  * Adds 'Authorization' headers to all requests if available.
  */
@@ -19,7 +19,7 @@ export class AuthHttp extends Http {
 
   // For some reason it's not enough to override this, needed to override
   // all methods
-  request(url: string|Request, options?: RequestOptionsArgs): Observable<Response> {
+  request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
     return super.request(url, this.addHeaders(options));
   }
 

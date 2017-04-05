@@ -1,7 +1,7 @@
-import {Http} from "@angular/http";
-import {Injectable} from "@angular/core";
-import {AppConfiguration} from "../../app-configuration.service";
-import {Observable} from "rxjs";
+import { Http } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { AppConfiguration } from '../../app-configuration.service';
+import { Observable } from 'rxjs/Observable';
 
 
 export interface ChartData {
@@ -13,14 +13,14 @@ export interface ChartData {
 export class AnalyticsService {
 
   constructor(private http: Http,
-              private config: AppConfiguration) {
+    private config: AppConfiguration) {
   }
 
 
 
-  getAnalytics(grouping: string = 'age'): Observable<ChartData> {
+  getAnalytics(grouping = 'age'): Observable<ChartData> {
     return this.http
       .get(`${this.config.API_URL}/analytics/${grouping}`)
-      .map(res=>res.json());
+      .map(res => res.json());
   }
 }

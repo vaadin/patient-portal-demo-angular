@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Http, Response} from "@angular/http";
-import {AppConfiguration} from "./app-configuration.service";
-import {AuthInfo} from "./auth-info";
-import {Observable} from "rxjs";
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { AppConfiguration } from './app-configuration.service';
+import { AuthInfo } from './auth-info';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -11,13 +11,13 @@ export class AuthService {
   redirectUrl: string;
 
   constructor(private http: Http,
-              private config: AppConfiguration) {
+    private config: AppConfiguration) {
   }
 
   login(authInfo: AuthInfo): Observable<boolean> {
     return this.http.post(`${this.config.API_URL}/login`, authInfo)
       .map(this.handleLogin)
-      .catch(res => Observable.throw(res.json().message || "Login failed"));
+      .catch(res => Observable.throw(res.json().message || 'Login failed'));
   }
 
   private handleLogin(res: Response) {

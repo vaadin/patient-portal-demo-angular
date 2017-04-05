@@ -13,39 +13,39 @@
   [height]="800"
   class="patients-grid">
   <kendo-grid-column field="lastName">
-    <template kendoHeaderTemplate>
+    <ng-template kendoHeaderTemplate>
       Name
-    </template>
-    <template kendoCellTemplate let-dataItem>
+    </ng-template>
+    <ng-template kendoCellTemplate let-dataItem>
       <span class="name">
         {{dataItem.lastName}}, {{dataItem.firstName}}
       </span>
-    </template>
+    </ng-template>
   </kendo-grid-column>
-  <template [ngIf]="!narrow">
+  <ng-template [ngIf]="!narrow">
     <kendo-grid-column field="id">
-      <template kendoHeaderTemplate>
+      <ng-template kendoHeaderTemplate>
         Id
-      </template>
+      </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="doctor.lastName">
-      <template kendoHeaderTemplate>
+      <ng-template kendoHeaderTemplate>
         Doctor
-      </template>
-      <template kendoCellTemplate let-dataItem>
+      </ng-template>
+      <ng-template kendoCellTemplate let-dataItem>
         {{dataItem.doctor.lastName}}, {{dataItem.doctor.firstName}}
-      </template>
+      </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="lastEntry">
-      <template kendoHeaderTemplate>
+      <ng-template kendoHeaderTemplate>
         Last Entry
-      </template>
-      <template kendoCellTemplate let-dataItem>
+      </ng-template>
+      <ng-template kendoCellTemplate let-dataItem>
         {{dataItem.lastEntry | date}}
-      </template>
+      </ng-template>
     </kendo-grid-column>
-  </template>
-  <template kendoDetailTemplate let-dataItem *ngIf="narrow">
+  </ng-template>
+  <ng-template kendoDetailTemplate let-dataItem *ngIf="narrow">
     <div class="details-row">
       <div class="field">
         <label>Id</label>
@@ -64,7 +64,7 @@
         <span>{{dataItem.lastEntry | date}}</span>
       </div>
     </div>
-  </template>
+  </ng-template>
 </kendo-grid>
 <div class="details" [class.open]="detailsOpen()">
   <router-outlet></router-outlet>

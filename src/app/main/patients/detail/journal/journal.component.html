@@ -5,58 +5,58 @@
 
 <kendo-grid
   [data]="entries | async">
-  <template [ngIf]="narrow">
+  <ng-template [ngIf]="narrow">
     <kendo-grid-column property="date" width="120">
-      <template kendoCellTemplate let-dataItem>
+      <ng-template kendoCellTemplate let-dataItem>
         <div class="cell-wrapper">
           <div class="date">{{dataItem.date | date}}</div>
           <div class="appointment">{{dataItem.appointmentType | capitalize}}</div>
           <div class="doctor-label">Doctor</div>
           <div class="doctor">{{dataItem.doctor.lastName}}, {{dataItem.doctor.firstName}}</div>
         </div>
-      </template>
+      </ng-template>
     </kendo-grid-column>
-  </template>
-  <template [ngIf]="!narrow">
+  </ng-template>
+  <ng-template [ngIf]="!narrow">
     <kendo-grid-column property="date" width="120">
-      <template kendoHeaderTemplate>
+      <ng-template kendoHeaderTemplate>
         Date
-      </template>
-      <template kendoCellTemplate let-dataItem>
+      </ng-template>
+      <ng-template kendoCellTemplate let-dataItem>
         <strong>{{dataItem.date | date}}</strong>
-      </template>
+      </ng-template>
     </kendo-grid-column>
     <kendo-grid-column property="appointment" width="120">
-      <template kendoHeaderTemplate>
+      <ng-template kendoHeaderTemplate>
         Appointment
-      </template>
-      <template kendoCellTemplate let-dataItem>
+      </ng-template>
+      <ng-template kendoCellTemplate let-dataItem>
         {{dataItem.appointmentType | capitalize}}
-      </template>
+      </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="doctor.lastName" width="150">
-      <template kendoHeaderTemplate>
+      <ng-template kendoHeaderTemplate>
         Doctor
-      </template>
-      <template kendoCellTemplate let-dataItem>
+      </ng-template>
+      <ng-template kendoCellTemplate let-dataItem>
         {{dataItem.doctor.lastName}}, {{dataItem.doctor.firstName}}
-      </template>
+      </ng-template>
     </kendo-grid-column>
     <kendo-grid-column property="entry">
-      <template kendoHeaderTemplate>
+      <ng-template kendoHeaderTemplate>
         Notes
-      </template>
-      <template kendoCellTemplate let-dataItem>
+      </ng-template>
+      <ng-template kendoCellTemplate let-dataItem>
       <span class="journal-entry">
         {{dataItem.entry}}
       </span>
-      </template>
+      </ng-template>
     </kendo-grid-column>
-  </template>
-  <template kendoDetailTemplate let-dataItem>
+  </ng-template>
+  <ng-template kendoDetailTemplate let-dataItem>
     <section *ngIf="dataItem.entry">
       <h3>Notes</h3>
       <article>{{dataItem.entry}}</article>
     </section>
-  </template>
+  </ng-template>
 </kendo-grid>

@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {Observable, BehaviorSubject} from "rxjs";
+import { Injectable } from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 export const NARROW_WIDTH_THRESHOLD = 600;
 
@@ -12,7 +12,7 @@ export class ResponsiveService {
     Observable
       .fromEvent(window, 'resize')
       .debounceTime(100)
-      .map(_=> window.innerWidth < NARROW_WIDTH_THRESHOLD)
+      .map(_ => window.innerWidth < NARROW_WIDTH_THRESHOLD)
       .share()
       .subscribe(this.resizeObservable);
   }

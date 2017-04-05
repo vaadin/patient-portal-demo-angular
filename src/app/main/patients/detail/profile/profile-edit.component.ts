@@ -1,9 +1,9 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {PatientsService} from "../../patients.service";
-import {Patient, Doctor} from "../../../entities";
-import {ActivatedRoute, Router} from "@angular/router";
-import {NgForm} from "@angular/forms";
-import {PlatformLocation} from "@angular/common";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { PatientsService } from '../../patients.service';
+import { Patient, Doctor } from '../../../entities';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { PlatformLocation } from '@angular/common';
 
 @Component({
   selector: 'app-profile-edit',
@@ -11,17 +11,15 @@ import {PlatformLocation} from "@angular/common";
   styleUrls: ['./profile-edit.component.css']
 })
 export class ProfileEditComponent implements OnInit, OnDestroy {
-
-
   patient: Patient;
-  stop: boolean = false;
+  stop = false;
   doctors: Doctor[] = [];
 
 
   constructor(private patientsService: PatientsService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private location: PlatformLocation) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: PlatformLocation) {
   }
 
   ngOnInit() {
@@ -46,7 +44,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   /* Select binding uses instance equality so we need to make sure we are using one of the available options. */
   fixDoctorInstance() {
     if (this.patient && this.patient.doctor && this.doctors.length > 0) {
-      this.patient.doctor = this.doctors.find(d=> d.id === this.patient.doctor.id);
+      this.patient.doctor = this.doctors.find(d => d.id === this.patient.doctor.id);
     }
   }
 

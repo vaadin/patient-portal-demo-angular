@@ -1,6 +1,6 @@
-import {RouterModule} from "@angular/router";
-import {AnalyticsComponent} from "./analytics.component";
-import {NgModule} from "@angular/core";
+import { RouterModule } from '@angular/router';
+import { AnalyticsComponent } from './analytics.component';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   imports: [
