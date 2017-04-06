@@ -63,7 +63,7 @@ export class AnalyticsComponent implements OnInit {
         return {
           value: group.patients,
           category: group.gender.charAt(0) + group.gender.substr(1).toLocaleLowerCase()
-        }
+        };
       });
     }
 

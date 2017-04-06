@@ -1,22 +1,12 @@
 <a routerLink="/patients/new" class="button primary add"><i class="fa fa-plus"></i> Add new patient</a>
 
-<kendo-grid
-  #grid
-  class="patients-grid"
-  [data]="patients | async"
-  [sortable]="{mode: 'single'}"
-  [pageSize]="pageSize"
-  [skip]="skip"
-  [pageable]="true"
-  [selectable]="true"
-  (selectionChange)="patientSelectionChanged($event)"
-  [height]="800"
-  class="patients-grid">
+<kendo-grid #grid class="patients-grid" [data]="patients | async" [sortable]="{mode: 'single'}" [pageSize]="pageSize" [skip]="skip"
+  [pageable]="true" [selectable]="true" (selectionChange)="patientSelectionChanged($event)" [height]="800" class="patients-grid">
   <kendo-grid-column field="lastName">
-    <ng-template kendoHeaderTemplate>
+    <ng-template kendoGridHeaderTemplate>
       Name
     </ng-template>
-    <ng-template kendoCellTemplate let-dataItem>
+    <ng-template kendoGridCellTemplate let-dataItem>
       <span class="name">
         {{dataItem.lastName}}, {{dataItem.firstName}}
       </span>
@@ -24,28 +14,28 @@
   </kendo-grid-column>
   <ng-template [ngIf]="!narrow">
     <kendo-grid-column field="id">
-      <ng-template kendoHeaderTemplate>
+      <ng-template kendoGridHeaderTemplate>
         Id
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="doctor.lastName">
-      <ng-template kendoHeaderTemplate>
+      <ng-template kendoGridHeaderTemplate>
         Doctor
       </ng-template>
-      <ng-template kendoCellTemplate let-dataItem>
+      <ng-template kendoGridCellTemplate let-dataItem>
         {{dataItem.doctor.lastName}}, {{dataItem.doctor.firstName}}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="lastEntry">
-      <ng-template kendoHeaderTemplate>
+      <ng-template kendoGridHeaderTemplate>
         Last Entry
       </ng-template>
-      <ng-template kendoCellTemplate let-dataItem>
+      <ng-template kendoGridCellTemplate let-dataItem>
         {{dataItem.lastEntry | date}}
       </ng-template>
     </kendo-grid-column>
   </ng-template>
-  <ng-template kendoDetailTemplate let-dataItem *ngIf="narrow">
+  <ng-template kendoGridDetailTemplate let-dataItem *ngIf="narrow">
     <div class="details-row">
       <div class="field">
         <label>Id</label>
