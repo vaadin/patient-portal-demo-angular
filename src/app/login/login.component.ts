@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
-import {NgForm} from "@angular/forms";
-import {AuthService} from "../auth.service";
-import {Router} from "@angular/router";
+import { Component } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: 'login.template.html',
@@ -10,23 +10,29 @@ import {Router} from "@angular/router";
 export class LoginComponent {
 
   errorMsg: string;
+  loginForm: FormGroup;
 
   constructor(private authService: AuthService,
-              private router: Router) {
+    private router: Router,
+    private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
-  login(form: NgForm, event: Event) {
+  login(event: Event) {
     event.preventDefault();
     this.errorMsg = '';
-    this.authService.login(form.value)
+    this.authService.login(this.loginForm.value)
       .subscribe(
-        () => {
-          this.router.navigate([this.authService.redirectUrl || '/']);
-          this.authService.redirectUrl = null;
-        },
-        err => {
-          this.errorMsg = err;
-        }
+      () => {
+        this.router.navigate([this.authService.redirectUrl || '/']);
+        this.authService.redirectUrl = null;
+      },
+      err => {
+        this.errorMsg = err;
+      }
       );
   }
 

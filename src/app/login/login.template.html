@@ -2,21 +2,20 @@
   <div class="login-box">
     <div class="form">
       <h1>Patient portal</h1>
-      <form #loginForm="ngForm" (ngSubmit)="login(loginForm, $event)">
+      <form [formGroup]="loginForm" (ngSubmit)="login($event)">
         <div class="field stacked">
           <label for="username">Username</label>
-          <input autofocus id="username" type="text" name="username" autocomplete="username" ngModel>
+          <input autofocus id="username" type="text" formControlName="username" autocomplete="username">
         </div>
         <div class="field stacked">
           <label for="password">Password</label>
-          <input id="password" type="password" name="password" autocomplete="password" ngModel>
+          <input id="password" type="password" formControlName="password" autocomplete="password">
         </div>
         <button type="submit" class="primary">Login</button>
       </form>
     </div>
     <div *ngIf="errorMsg" role="alert" class="alert error">
-      <i class="fa fa-lock"></i>
-      {{errorMsg}}
+      <i class="fa fa-lock"></i> {{errorMsg}}
     </div>
   </div>
 </div>
