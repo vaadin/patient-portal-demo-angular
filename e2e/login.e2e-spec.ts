@@ -1,5 +1,5 @@
 import { LoginPage } from './login.po';
-import { PatientsPage } from "./patients.po";
+import { PatientsPage } from './patients.po';
 
 describe('Login page', function () {
   let page: LoginPage;
