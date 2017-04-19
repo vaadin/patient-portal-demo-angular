@@ -25,15 +25,12 @@ export class LoginComponent {
     event.preventDefault();
     this.errorMsg = '';
     this.authService.login(this.loginForm.value)
-      .subscribe(
-      () => {
+      .subscribe(() => {
         this.router.navigate([this.authService.redirectUrl || '/']);
         this.authService.redirectUrl = null;
-      },
-      err => {
+      }, err => {
         this.errorMsg = err;
-      }
-      );
+      });
   }
 
 }
