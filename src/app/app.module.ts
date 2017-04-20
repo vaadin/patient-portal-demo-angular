@@ -9,7 +9,6 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth-guard.service';
 import { AuthHttp } from './auth-http';
 import { PageNotFoundComponent } from './page-not-found.component';
-import { AppConfiguration } from './app-configuration.service';
 import { ResponsiveService } from './main/responsive.service';
 
 
@@ -39,7 +38,6 @@ export function authHttpFactory(xhrBackend: XHRBackend,
       useFactory: authHttpFactory,
       deps: [XHRBackend, RequestOptions]
     },
-    AppConfiguration,
     ResponsiveService
   ],
   bootstrap: [AppComponent]

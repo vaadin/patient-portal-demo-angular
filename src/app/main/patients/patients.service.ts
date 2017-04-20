@@ -2,9 +2,9 @@ import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Patient } from '../entities';
-import { AppConfiguration } from '../../app-configuration.service';
 import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
 import { GridDataResult } from '@progress/kendo-angular-grid';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class PatientsService {
@@ -13,15 +13,14 @@ export class PatientsService {
   private sort: SortDescriptor[];
   private state: any;
 
-  constructor(private http: Http,
-    private config: AppConfiguration) {
+  constructor(private http: Http) {
   }
 
   getPatients(state) {
     this.state = state;
     console.log(state);
     this.http
-      .get(`${this.config.API_URL}/patients?page=${state.skip / state.take}&limit=${state.take}`)
+      .get(`${environment.API_URL}/patients?page=${state.skip / state.take}&limit=${state.take}`)
       .map(res => res.json())
       .catch(res => Observable.throw(res.json().message))
       .subscribe(res => {
@@ -54,13 +53,13 @@ export class PatientsService {
   }
 
   getDoctors() {
-    return this.http.get(`${this.config.API_URL}/doctors`)
+    return this.http.get(`${environment.API_URL}/doctors`)
       .map(res => res.json());
   }
 
   deleteCurrentPatient() {
     this.http
-      .delete(`${this.config.API_URL}/patients/${this.currentPatient.getValue().id}`)
+      .delete(`${environment.API_URL}/patients/${this.currentPatient.getValue().id}`)
       .catch(res => Observable.throw(res.json().message))
       .subscribe(() => {
         this.setCurrentPatient(null);
@@ -69,8 +68,8 @@ export class PatientsService {
   }
 
   savePatient(patient: Patient) {
-    let putOrPost = patient.id ? this.http.post(`${this.config.API_URL}/patients/${patient.id}`, patient) :
-      this.http.put(`${this.config.API_URL}/patients`, patient);
+    let putOrPost = patient.id ? this.http.post(`${environment.API_URL}/patients/${patient.id}`, patient) :
+      this.http.put(`${environment.API_URL}/patients`, patient);
 
     return putOrPost
       .catch(res => Observable.throw(res.json().message))
