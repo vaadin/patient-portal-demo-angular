@@ -6,10 +6,10 @@ describe('Login page', function () {
 
   beforeEach(() => {
     page = new LoginPage();
+    page.navigateTo();
   });
 
   it('Should show error message on invalid logins', () => {
-    page.navigateTo();
     page.getUsernameInput().sendKeys('user');
     page.getPasswordInput().sendKeys('wrong');
     page.getLoginButton().click();
@@ -18,7 +18,6 @@ describe('Login page', function () {
   });
 
   it('Should navigate to patients view with correct login', () => {
-    page.navigateTo();
     page.getUsernameInput().sendKeys('user');
     page.getPasswordInput().sendKeys('password');
     page.getLoginButton().click();
