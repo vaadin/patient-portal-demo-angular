@@ -10,7 +10,7 @@ Make sure you have NPM installed.
 
 1. Install `angular-cli`
 
-`$ npm install -g angular-cli`
+`npm install -g @angular/cli`
 
 2. Install dependencies
 
