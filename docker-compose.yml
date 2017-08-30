@@ -1,0 +1,8 @@
+version: '3'
+services:
+  angular-patient-portal:
+    build: .
+    environment:
+       - spring.datasource.url=jdbc:mysql://$datasourceUrl/pp
+    image:
+      'repo.vaadin.com:5001/angular-patient-portal:node'
