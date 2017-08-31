@@ -2,6 +2,8 @@ version: '3'
 services:
   angular-patient-portal:
     build: .
+    ports:
+      - 80:80
     environment:
        - spring.datasource.url=jdbc:mysql://$datasourceUrl:3306/pp
     image:
